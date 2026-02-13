@@ -1,0 +1,1 @@
+# This is a basic even odd detector created using html css and java script.
