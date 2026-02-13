@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Even or Odd Checker</title>
+
+<style>
+/* Google Retro Font */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Press Start 2P', cursive;
+    overflow: hidden;
+    height: 100vh;
+    background: linear-gradient(135deg, #1a0033, #000000);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Floating Retro Numbers Background */
+.background span {
+    position: absolute;
+    color: rgba(255,255,255,0.08);
+    font-size: 40px;
+    animation: float 20s linear infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+    }
+    100% {
+        transform: translateY(-10vh) rotate(360deg);
+    }
+}
+
+/* Main Box */
+.container {
+    text-align: center;
+    background: rgba(0,0,0,0.7);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #ff00ff, 0 0 40px #00ffff;
+    z-index: 2;
+}
+
+h1 {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #00ffff;
+}
+
+input {
+    padding: 10px;
+    width: 200px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+    outline: none;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #ff00ff;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #00ffff;
+    transform: scale(1.1);
+}
+
+/* Popup Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 3;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: black;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 0 20px #00ffff, 0 0 40px #ff00ff;
+}
+
+.close {
+    margin-top: 20px;
+    padding: 8px 15px;
+    background: #ff0000;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.close:hover {
+    background: #ffff00;
+    color: black;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Floating Background Numbers -->
+<div class="background" id="background"></div>
+
+<div class="container">
+    <h1>EVEN OR ODD CHECKER</h1>
+    <input type="number" id="numberInput" placeholder="Enter a number">
+    <br>
+    <button onclick="checkNumber()">CHECK</button>
+</div>
+
+<!-- Popup Modal -->
+<div class="modal" id="resultModal">
+    <div class="modal-content">
+        <h2 id="resultText"></h2>
+        <button class="close" onclick="closeModal()">CLOSE</button>
+    </div>
+</div>
+
+<script>
+// Generate Floating Numbers
+const bg = document.getElementById("background");
+for (let i = 0; i < 50; i++) {
+    let span = document.createElement("span");
+    span.innerText = Math.floor(Math.random() * 10);
+    span.style.left = Math.random() * 100 + "vw";
+    span.style.fontSize = Math.random() * 50 + 20 + "px";
+    span.style.animationDuration = (Math.random() * 10 + 10) + "s";
+    bg.appendChild(span);
+}
+
+// Even Odd Logic
+function checkNumber() {
+    let number = document.getElementById("numberInput").value;
+    let resultText = document.getElementById("resultText");
+    let modal = document.getElementById("resultModal");
+
+    if (number === "") {
+        resultText.innerText = "Please enter a number!";
+    } else if (number % 2 === 0) {
+        resultText.innerText = number + " is EVEN 🎉";
+    } else {
+        resultText.innerText = number + " is ODD 🔥";
+    }
+
+    modal.style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("resultModal").style.display = "none";
+}
+</script>
+
+</body>
+</html>
